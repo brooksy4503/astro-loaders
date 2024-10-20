@@ -1,0 +1,73 @@
+---
+const navItems = [
+  { href: "/", text: "Home" },
+  { href: "/countries", text: "Countries" },
+  { href: "/jokes", text: "Jokes" },
+  { href: "/placeholder", text: "Posts" },
+  { href: "/randomuser", text: "Random Users" },
+];
+---
+
+<nav class="bg-gray-800 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="/" class="text-xl font-bold">My Astro Site</a>
+    <div class="lg:hidden">
+      <button id="menu-toggle" class="text-white focus:outline-none">
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    <ul id="menu" class="hidden lg:flex lg:space-x-4">
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="block py-2 lg:py-0 px-4 lg:px-0 hover:bg-gray-700 lg:hover:bg-transparent hover:text-gray-300 transition-colors duration-200"
+            >
+              {item.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+
+  if (menuToggle && menu) {
+    menuToggle.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("block");
+      menu.classList.toggle("absolute");
+      menu.classList.toggle("top-16");
+      menu.classList.toggle("left-0");
+      menu.classList.toggle("right-0");
+      menu.classList.toggle("bg-gray-800");
+      menu.classList.toggle("z-50");
+    });
+  }
+</script>
+
+<style>
+  @media (max-width: 1023px) {
+    #menu {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+</style>

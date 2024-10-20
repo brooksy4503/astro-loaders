@@ -1,32 +1,55 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+
+const pages = [
+  { href: "/countries", text: "Countries", color: "bg-blue-500", icon: "🌎" },
+  { href: "/jokes", text: "Jokes", color: "bg-green-500", icon: "😂" },
+  { href: "/placeholder", text: "Posts", color: "bg-yellow-500", icon: "📝" },
+  {
+    href: "/randomuser",
+    text: "Random Users",
+    color: "bg-purple-500",
+    icon: "👤",
+  },
+];
 ---
 
-<Layout title="Welcome to My Astro Site">
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-6">Welcome to My Astro Site</h1>
-    <p class="mb-4">This is the home page of our awesome Astro project.</p>
-    <nav>
-      <ul class="list-disc list-inside">
-        <li>
-          <a href="/countries" class="text-blue-600 hover:underline"
-            >View Countries</a
-          >
-        </li>
-        <li>
-          <a href="/jokes" class="text-blue-600 hover:underline">Read Jokes</a>
-        </li>
-        <li>
-          <a href="/randomuser" class="text-blue-600 hover:underline"
-            >Random Users</a
-          >
-        </li>
-        <li>
-          <a href="/placeholder" class="text-blue-600 hover:underline"
-            >JSON Placeholder Posts</a
-          >
-        </li>
-      </ul>
-    </nav>
-  </main>
+<Layout title="Astro Data Loading Examples">
+  <div class="flex flex-col min-h-screen">
+    <Navigation />
+    <main
+      class="flex-grow container mx-auto px-4 py-6 sm:py-8 flex flex-col justify-center"
+    >
+      <h1 class="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4">
+        Astro Data Loading Examples
+      </h1>
+      <p class="text-base sm:text-lg text-center mb-6 sm:mb-8">
+        Click on the cards below to view different data loading examples:
+      </p>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+      >
+        {
+          pages.map((page) => (
+            <a
+              href={page.href}
+              class={`${page.color} hover:opacity-90 text-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 transform hover:scale-105`}
+            >
+              <div class="p-4 sm:p-6 flex flex-col items-center">
+                <span class="text-3xl sm:text-4xl mb-2 sm:mb-4">
+                  {page.icon}
+                </span>
+                <h2 class="text-lg sm:text-xl font-bold text-center">
+                  {page.text}
+                </h2>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </main>
+    <Footer />
+  </div>
 </Layout>

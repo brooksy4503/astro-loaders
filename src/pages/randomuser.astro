@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
 import { fetchRandomUsers, type RandomUser } from "../loaders/randomUserLoader";
 
 const users = await fetchRandomUsers(10); // Fetch 10 random users
 ---
 
 <Layout title="Random Users">
+  <Navigation />
   <main class="container mx-auto px-4 py-8">
     <h1 class="text-4xl font-bold mb-6">Random Users</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

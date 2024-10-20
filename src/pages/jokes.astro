@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
 import { fetchJokes, type Joke } from "../loaders/jokeLoader";
 
 const jokes = await fetchJokes();
 ---
 
 <Layout title="Jokes">
+  <Navigation />
   <main class="container mx-auto px-4 py-8">
     <h1 class="text-4xl font-bold mb-6">Jokes</h1>
     <ul class="space-y-6">

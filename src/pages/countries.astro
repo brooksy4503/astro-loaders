@@ -1,12 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
+import LoadingSpinner from "../components/LoadingSpinner.astro";
 import { countryLoader, type Country } from "../loaders/countryLoader";
 
 const countries = await countryLoader();
 ---
 
 <Layout title="Countries">
-  <main class="container mx-auto px-4 py-8">
+  <Navigation />
+  <LoadingSpinner />
+  <main
+    id="main-content"
+    class="container mx-auto px-4 py-8 opacity-0 transition-opacity duration-300"
+  >
     <h1 class="text-4xl font-bold mb-6">Countries</h1>
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {
@@ -25,3 +32,15 @@ const countries = await countryLoader();
     </ul>
   </main>
 </Layout>
+
+<script>
+  window.addEventListener("load", () => {
+    const loadingSpinner = document.getElementById("loading-spinner");
+    const mainContent = document.getElementById("main-content");
+
+    if (loadingSpinner && mainContent) {
+      loadingSpinner.style.display = "none";
+      mainContent.style.opacity = "1";
+    }
+  });
+</script>
