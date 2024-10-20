@@ -1,4 +1,4 @@
-# Astro Data Loading Examples - Product Requirements Document
+# Astro Content Loader API Examples - Product Requirements Document
 
 ## 1. Project Overview
 
