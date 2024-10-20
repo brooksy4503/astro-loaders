@@ -1,0 +1,29 @@
+---
+import { fetchCountries, type Country } from "../loaders/countryLoader";
+
+const countries = await fetchCountries();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countries List</title>
+  </head>
+  <body>
+    <h1>Countries List</h1>
+    <ul>
+      {
+        countries.map((country: Country) => (
+          <li>
+            <strong>{country.name}</strong> (ID: {country.id})
+            <br />
+            Capital: {country.capital}
+            <br />
+            Population: {country.population.toLocaleString()}
+          </li>
+        ))
+      }
+    </ul>
+  </body>
+</html>
