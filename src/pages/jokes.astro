@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { fetchJokes, type Joke } from "../loaders/jokeLoader";
+
+const jokes = await fetchJokes();
+---
+
+<Layout title="Jokes">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">Jokes</h1>
+    <ul class="space-y-6">
+      {
+        jokes.map((joke: Joke) => (
+          <li class="bg-white shadow rounded-lg p-6">
+            <h2 class="text-xl font-semibold mb-2">Joke #{joke.id}</h2>
+            <p class="mb-4">
+              <strong>Setup:</strong> {joke.setup}
+            </p>
+            <p class="italic">
+              <strong>Punchline:</strong> {joke.punchline}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>

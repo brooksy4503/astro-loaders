@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { fetchRandomUsers, type RandomUser } from "../loaders/randomUserLoader";
+
+const users = await fetchRandomUsers(10); // Fetch 10 random users
+---
+
+<Layout title="Random Users">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">Random Users</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        users.map((user: RandomUser) => (
+          <div class="bg-white shadow rounded-lg p-6">
+            <img
+              src={user.picture.large}
+              alt={`${user.name.first} ${user.name.last}`}
+              class="w-32 h-32 rounded-full mx-auto mb-4"
+            />
+            <h2 class="text-xl font-semibold text-center mb-2">
+              {user.name.first} {user.name.last}
+            </h2>
+            <p class="text-center text-gray-600 mb-2">{user.email}</p>
+            <p class="text-center">
+              {user.location.city}, {user.location.country}
+            </p>
+            <p class="text-center">{user.phone}</p>
+          </div>
+        ))
+      }
+    </div>
+  </main>
+</Layout>

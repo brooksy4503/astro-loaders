@@ -2,19 +2,17 @@ import { z } from 'astro:content';
 import fetch from 'node-fetch';
 
 export const CountrySchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  capital: z.string(),
-  population: z.number()
+  name: z.object({
+    common: z.string(),
+  }),
+  capital: z.array(z.string()).optional(),
+  population: z.number(),
+  // Add other fields as needed
 });
 
 export type Country = z.infer<typeof CountrySchema>;
 
-export function countryLoader() {
-  return CountrySchema.shape;
-}
-
-export async function fetchCountries(): Promise<Country[]> {
+export async function countryLoader(): Promise<Country[]> {
   try {
     const response = await fetch('https://restcountries.com/v3.1/all');
     const data: unknown = await response.json();
@@ -24,7 +22,6 @@ export async function fetchCountries(): Promise<Country[]> {
     }
 
     return data.map((country: any): Country => ({
-      id: country.cca3,
       name: country.name.common,
       capital: country.capital?.[0] || 'N/A',
       population: country.population

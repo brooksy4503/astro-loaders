@@ -1,29 +1,27 @@
 ---
-import { fetchCountries, type Country } from "../loaders/countryLoader";
+import Layout from "../layouts/Layout.astro";
+import { countryLoader, type Country } from "../loaders/countryLoader";
 
-const countries = await fetchCountries();
+const countries = await countryLoader();
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Countries List</title>
-  </head>
-  <body>
-    <h1>Countries List</h1>
-    <ul>
+<Layout title="Countries">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">Countries</h1>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {
         countries.map((country: Country) => (
-          <li>
-            <strong>{country.name}</strong> (ID: {country.id})
-            <br />
-            Capital: {country.capital}
-            <br />
-            Population: {country.population.toLocaleString()}
+          <li class="bg-white shadow rounded-lg p-4">
+            <h2 class="text-xl font-semibold mb-2">{country.name.common}</h2>
+            <p>
+              <strong>Capital:</strong> {country.capital}
+            </p>
+            <p>
+              <strong>Population:</strong> {country.population.toLocaleString()}
+            </p>
           </li>
         ))
       }
     </ul>
-  </body>
-</html>
+  </main>
+</Layout>
