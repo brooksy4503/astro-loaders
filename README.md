@@ -45,14 +45,13 @@ To deploy this Astro site to production, you can use various hosting platforms t
 
 3. **GitHub Pages**:
 
-   - Update your `astro.config.mjs` file to include your repository name as the base: ```javascript
+   - Update your `astro.config.mjs` file to include your repository name as the base:
+
+     ```javascript
      export default defineConfig({
-     site: 'https://brooksy4503.github.io',
-     base: '/astro-loaders',
+       site: "https://brooksy4503.github.io",
+       base: "/astro-loaders",
      });
-
-     ```
-
      ```
 
    - Run `npm run build`
